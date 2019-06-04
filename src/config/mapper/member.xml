@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.osf.test.Member">
+	<select id="selectList" resultType="member">
+		select * 
+		from member_info
+		order by mi_num desc
+	</select>
+	<select id="selectMemberByPk" resultType="member">
+		select * 
+		from member_info
+		where mi_num=#{miNum}
+	</select>
+	<select id="selectMemberByIdAndPwd" resultType="member">
+		select * 
+		from member_info
+		where mi_id=#{miId}
+		and mi_pwd=#{miPwd}
+	</select>
+	<insert id="insertMember">
+		insert into member_info(
+		 MI_NUM
+		,MI_NAME
+		,MI_ID
+		,MI_PWD
+		,MI_EMAIL
+		,MI_TRANS
+		,MI_BIRTH
+		,MI_ZIPCODE
+		,MI_ADDR1
+		,MI_ADDR2
+		,MI_CREDAT
+		,MI_CRETIM
+		,MI_MODDAT
+		,MI_MODTIM
+		,MI_MAIN_IMG
+		,MI_NICK
+		,MI_ETC
+		)
+		values(
+		seq_mi_num.nextval
+		,#{miName}
+		,#{miId}
+		,#{miPwd}
+		,#{miEmail}
+		,#{miTrans}
+		,#{miBirth}
+		,#{miZipcode}
+		,#{miAddr1}
+		,#{miAddr2}
+		,to_char(sysdate,'YYYYMMDD')
+		,to_char(sysdate,'HH24MISS')
+		,to_char(sysdate,'YYYYMMDD')
+		,to_char(sysdate,'HH24MISS')
+		,#{miMainImg}
+		,#{miNick}
+		,#{miEtc}
+		)
+	</insert>
+</mapper>
